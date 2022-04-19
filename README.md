@@ -1,5 +1,9 @@
 # quizz-game
 
+All themes quiz project. One correct answer per question, it's up to you!
+
+Project made in Vue Js view with API call to open trivia api
+
 ## Project setup
 ```
 npm install
@@ -10,15 +14,6 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Preview 
+![](Result.gif)
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
