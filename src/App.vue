@@ -28,13 +28,14 @@
 
  <!-- When we submit the answer, the rest is shown -->
   <section v-if="this.answerSubmitted" class="result">
-    <h4 v-if="this.chosenAnswer == this.correctAnswer">
-      ✔️ Congratulations, the answer "{{ this.correctAnswer }}" is correct
+    <h4 v-if="this.chosenAnswer == this.correctAnswer"
+    v-html="'✔️ Congratulations, the answer ' + this.correctAnswer + '  is correct'"
+    >
     </h4>
-    <h4 v-else>
-      ❌ I'm sorry, you picked the wrong answer. The correct is "{{ this.correctAnswer }}"
+    <h4 v-else
+    v-html="'❌ I`m sorry, you picked the wrong answer. The correct is ' +  this.correctAnswer + '!'">
     </h4>
-    <button class="send" type="button">Next question</button>
+    <button @click="this.getNewQuestion()" class="send" type="button">Next question</button>
   </section>
 
 </template>
@@ -82,19 +83,25 @@ export default {
           console.log('WRONNNG ANSWER');
         }
       }
+    },
+
+    getNewQuestion() {
+      this.axios
+      .get('https://opentdb.com/api.php?amount=10&category=18')
+      .then((response) => {
+        this.question = response.data.results[0].question;
+        this.incorrectAnswers = response.data.results[0].incorrect_answers;
+        this.correctAnswer = response.data.results[0].correct_answer;
+     });
     }
+
   },
 
   created() {
-    this.axios
-    .get('https://opentdb.com/api.php?amount=10&category=18')
-    .then((response) => {
-      this.question = response.data.results[0].question;
-      this.incorrectAnswers = response.data.results[0].incorrect_answers;
-      this.correctAnswer = response.data.results[0].correct_answer;
-    })
+    this.getNewQuestion();
   }
 }
+
 </script>
 
 <style>
