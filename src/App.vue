@@ -1,16 +1,25 @@
 <template>
 
   <div>
+    <!-- if we got the questions we can show the answers -->
+    <div v-if="this.question">
+
     <!-- v-html to notice vue that is html -->
    <h1 v-html="this.question" />
-    <div class="inputs">
-   <input type="radio" name="options" value="True">
-   <label>True</label><br>
 
-   <input type="radio" name="options" value="False">
-   <label>False</label><br><button class="send" type="button">Send</button>
+   <div v-bind:key="index" v-for="(answer,index) in this.answers" class="inputs">
+    <input
+      type="radio"
+      name="options"
+      value="answer">
 
-    </div>
+    <label v-html="answer"></label><br>
+
+   </div>
+
+    <button class="send" type="button">Send</button>
+
+  </div>
 
   </div>
 </template>
@@ -40,6 +49,7 @@ export default {
     // In order to mix the array we'll use the math random method by multiplying by the number of elements in the array
       answers.splice( Math.round( Math.random() * answers.length) , 0, this.correctAnswer);
       return answers;
+    // Now the right answer is always at a random position
     }
   },
 
