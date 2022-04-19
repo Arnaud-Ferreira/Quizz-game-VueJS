@@ -33,7 +33,7 @@
     >
     </h4>
     <h4 v-else
-    v-html="'❌ I`m sorry, you picked the wrong answer. The correct is ' +  this.correctAnswer + '!'">
+    v-html="'❌ I`m sorry, you picked the wrong answer. The correct is ' +  this.correctAnswer">
     </h4>
     <button @click="this.getNewQuestion()" class="send" type="button">Next question</button>
   </section>
@@ -86,6 +86,11 @@ export default {
     },
 
     getNewQuestion() {
+      // to not see the answer elements anymore
+      this.answerSubmitted = false;
+      this.chosenAnswer = undefined;
+      this.question = undefined;
+
       this.axios
       .get('https://opentdb.com/api.php?amount=10&category=18')
       .then((response) => {
