@@ -1,8 +1,8 @@
 <template>
 
   <div>
-
-   <h1>Title of the question</h1>
+    <!-- v-html to notice vue that is html -->
+   <h1 v-html="this.question" />
     <div class="inputs">
    <input type="radio" name="options" value="True">
    <label>True</label><br>
@@ -20,11 +20,21 @@
 export default {
   name: 'App',
   
+  data() {
+    return {
+      question: undefined,
+      incorrectAnswers: [],
+      correctAnswer: []
+    }
+  },
+
   created() {
     this.axios
     .get('https://opentdb.com/api.php?amount=10&category=18')
     .then((response) => {
-      console.log(response.data.results[0])
+      this.question = response.data.results[0].question;
+      this.incorrectAnswers = response.data.results[0].incorrect_answers;
+      this.correctAnswer = response.data.results[0].correct_answer;
     })
   }
 }
