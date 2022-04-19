@@ -5,7 +5,7 @@
     <ScoreBoard :winCount="this.winCount" :loseCount="this.loseCount" />
 
     <!-- if we got the questions we can show the answers -->
-    <div v-if="this.question">
+    <div class="question" v-if="this.question">
 
     <!-- v-html to notice vue that is html -->
    <h1 v-html="this.question" />
@@ -120,6 +120,9 @@ export default {
 </script>
 
 <style>
+body {
+  background-color: #e6ecf3bf;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -138,11 +141,24 @@ button.send {
   margin-top: 15px;
   height: 40px;
   min-width: 120px;
-  padding: 0 16px;
+  padding: 0 20px;
   color: #fff;
   background-color: #3e7ec7;
   border: 1px solid #3e7ec7;
   cursor: pointer;
   border-radius: 3px;
+}
+
+.question {
+  margin-top: 3rem;
+}
+
+h1 {
+  margin-bottom: 2.5rem;
+}
+
+.inputs {
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
 }
 </style>

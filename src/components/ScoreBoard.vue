@@ -20,13 +20,15 @@
 
 section.score {
     border-bottom: 1px solid grey;
-    padding: 24px;
-    font-size: 18px;
+    padding: 30px;
+    padding-bottom: 3rem;
+    font-size: 25px;
     
 }
 
 span {
-    padding: 10px;
+    margin-top: 3rem;
+    padding: 8px;
     font-weight: bold;
     border: 1px solid rgb(106, 143, 208);
 }
