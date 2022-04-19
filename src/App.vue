@@ -9,19 +9,34 @@
 
    <div v-bind:key="index" v-for="(answer,index) in this.answers" class="inputs">
     <input
+      :disabled="this.answerSubmitted"
+      v-model="this.chosenAnswer"
       type="radio"
       name="options"
-      value="answer">
+      :value="answer"
+      >
 
     <label v-html="answer"></label><br>
 
    </div>
+    <!-- if the answer has not been submitted then we will display this button -->
+    <button v-if="!this.answerSubmitted" @click="this.submitAnswer()" class="send" type="button">Send</button>
 
-    <button class="send" type="button">Send</button>
+  </div>
 
   </div>
 
-  </div>
+ <!-- When we submit the answer, the rest is shown -->
+  <section v-if="this.answerSubmitted" class="result">
+    <h4 v-if="this.chosenAnswer == this.correctAnswer">
+      ✔️ Congratulations, the answer "{{ this.correctAnswer }}" is correct
+    </h4>
+    <h4 v-else>
+      ❌ I'm sorry, you picked the wrong answer. The correct is "{{ this.correctAnswer }}"
+    </h4>
+    <button class="send" type="button">Next question</button>
+  </section>
+
 </template>
 
 <script>
@@ -34,6 +49,8 @@ export default {
       question: undefined,
       incorrectAnswers: [],
       correctAnswer: [],
+      chosenAnswer: undefined,
+      answerSubmitted: false,
     }
   },
 
@@ -50,6 +67,21 @@ export default {
       answers.splice( Math.round( Math.random() * answers.length) , 0, this.correctAnswer);
       return answers;
     // Now the right answer is always at a random position
+    }
+  },
+
+  methods: {
+    submitAnswer: function() {
+      if (!this.chosenAnswer) {
+        console.log('Pick one of the options');
+      } else {
+        this.answerSubmitted = true;
+      if(this.chosenAnswer == this.correctAnswer) {
+          console.log('Good answer');
+        } else {
+          console.log('WRONNNG ANSWER');
+        }
+      }
     }
   },
 
