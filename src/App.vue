@@ -24,7 +24,22 @@ export default {
     return {
       question: undefined,
       incorrectAnswers: [],
-      correctAnswer: []
+      correctAnswer: [],
+    }
+  },
+
+  computed: {
+    answers() {
+    // we add the right and wrong answers in the same array
+    // we need to parse it in JSON otherwise the values goes wrong
+      const answers = JSON.parse( JSON.stringify(this.incorrectAnswers) );
+    // To add the elements, we'll use the splice method
+    // the first argument is the position of the element we want to add
+    // the second is the number of elements we want to delete
+    // the third is the element we want to add
+    // In order to mix the array we'll use the math random method by multiplying by the number of elements in the array
+      answers.splice( Math.round( Math.random() * answers.length) , 0, this.correctAnswer);
+      return answers;
     }
   },
 
