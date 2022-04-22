@@ -2,7 +2,7 @@
 
 All themes quiz project. One correct answer per question, it's up to you!
 
-Project made in Vue Js view with API call to open trivia api
+Project made in Vue Js CLI with API call to open trivia api
 
 ## Preview 
 ![](Result.gif)
